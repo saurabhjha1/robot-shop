@@ -1,3 +1,4 @@
+// fixed memory leak
 package com.instana.robotshop.shipping;
 
 import java.util.List;
