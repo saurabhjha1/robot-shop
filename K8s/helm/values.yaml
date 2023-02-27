@@ -1,9 +1,15 @@
-# Registry and repository for Docker images
+# Registry and rpository for Docker images
 # Default is docker/robotshop/image:latest
 image:
   repo: robotshop
   version: latest
   pullPolicy: IfNotPresent
+
+# Alternative payment gateway URL
+# Default is https://www.paypal.com
+payment:
+  gateway: null
+  #gateway: https://www.worldpay.com
 
 # EUM configuration
 # Provide your key and set the endpoint
@@ -22,43 +28,15 @@ nodeport: false
 # "special" Openshift. Set to true when deploying to any openshift flavour
 openshift: false
 
-ocCreateRoute: false
-
-######################################
-# Affinities for individual workloads
-# set in the following way:
-# <workload>:
-#   affinity: {}
-#   nodeSelector: {}
-#   tolerations: []
-######################################
-
-cart: {}
-
-catalogue: {}
-
-dispatch: {}
-
-mongodb: {}
-
-mysql: {}
-
-payment:
-  # Alternative payment gateway URL
-  # Default is https://www.paypal.com
-  gateway: null
-  #gateway: https://www.worldpay.com
-
-rabbitmq: {}
-
-ratings: {}
-
+# Storage class to use with redis statefulset.
 redis:
-  # Storage class to use with redis statefulset.
   storageClassName: standard
 
-shipping: {}
+# appRedisConnection:
+#   host:
+#   port:
+#   db:
+#   sslCrt:
 
-user: {}
 
-web: {}
+ocCreateRoute: false

@@ -27,6 +27,22 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          {{ if .Values.appRedisConnection.host }}
+          - name: REDIS_HOST
+            value: {{ .Values.appRedisConnection.host | quote }}
+          {{ end }}
+          {{ if .Values.appRedisConnection.port }}
+          - name: REDIS_PORT
+            value: {{ .Values.appRedisConnection.port | quote }}
+          {{ end }}
+          {{ if .Values.appRedisConnection.db }}
+          - name: REDIS_DB
+            value: {{ .Values.appRedisConnection.db | quote }}
+          {{ end }}
+          {{ if .Values.appRedisConnection.sslCrt }}
+          - name: REDIS_SSL_CRT
+            value: {{ .Values.appRedisConnection.sslCrt | quote }}
+          {{ end }}
         ports:
         - containerPort: 8080
         resources:
@@ -36,15 +52,3 @@ spec:
           requests:
             cpu: 100m
             memory: 50Mi
-      {{- with .Values.cart.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.cart.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.cart.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
