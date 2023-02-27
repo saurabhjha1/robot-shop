@@ -29,10 +29,10 @@ spec:
         - containerPort: 3306
         resources:
           limits:
-            cpu: 200m
+            cpu: "1"
             memory: 1024Mi
           requests:
-            cpu: 100m
+            cpu: "1"
             memory: 700Mi
       restartPolicy: Always
       {{- with .Values.mysql.affinity }}
