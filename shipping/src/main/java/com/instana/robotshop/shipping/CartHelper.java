@@ -51,6 +51,7 @@ public class CartHelper {
                 while ((line = in.readLine()) != null) {
                     if (line.length() > 0) {
                         status = true;
+                        break;
                     }
                     // buffer.append(line);
                 }
