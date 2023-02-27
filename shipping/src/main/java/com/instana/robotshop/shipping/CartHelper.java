@@ -27,8 +27,9 @@ public class CartHelper {
 
     // TODO - Remove deprecated calls
     public String addToCart(String id, String data) {
+        boolean status = false;
         logger.info("add shipping to cart {}", id);
-        StringBuilder buffer = new StringBuilder();
+        // StringBuilder buffer = new StringBuilder();
 
         CloseableHttpClient httpClient = null;
         try {
@@ -42,12 +43,16 @@ public class CartHelper {
             payload.setContentType("application/json");
             postRequest.setEntity(payload);
             CloseableHttpResponse res = httpClient.execute(postRequest);
-
+            
+            //fix the memory leak
             if (res.getStatusLine().getStatusCode() == 200) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
                 String line;
                 while ((line = in.readLine()) != null) {
-                    buffer.append(line);
+                    if (line.length() > 0) {
+                        status = true;
+                    }
+                    // buffer.append(line);
                 }
             } else {
                 logger.warn("Failed with code {}", res.getStatusLine().getStatusCode());
@@ -70,6 +75,7 @@ public class CartHelper {
         }
 
         // this will be empty on error
-        return buffer.toString();
+        return status ? "OK" : "ERROR";
+        // return buffer.toString();
     }
 }
