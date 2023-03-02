@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-redis-config
+data:
+  redis-config: |
+    maxmemory-policy allkeys-lru 
+    appendonly yes  
+    save 60 100
+    maxclients 100
+    latency-monitor-threshold 30
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -20,13 +32,21 @@ spec:
       {{ end }}
       containers:
       - name: redis
-        image: redis:4.0.6
+        image: redis:5.0.4
+        command:
+          - redis-server
+          - "/redis-master/redis.conf"
+        env:
+        - name: MASTER
+          value: "true"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 6379
         volumeMounts:
           - name: data
-            mountPath: /mnt/redis
+            mountPath: /redis-master-data
+          - mountPath: /redis-master
+            name: config
         resources:
           limits:
             cpu: 200m
@@ -47,6 +67,15 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: example-redis-config
+          items:
+          - key: redis-config
+            path: redis.conf
   volumeClaimTemplates:
     - metadata:
         name: data
