@@ -39,4 +39,22 @@ appRedisConnection:
   sslCrt:
 
 
+host:
+  CATALOGUE_HOST: catalogue
+  USER_HOST: user
+  CART_HOST: cart
+  SHIPPING_HOST: shipping 
+  PAYMENT_HOST: payment 
+  RATINGS_HOST: ratings
+
 ocCreateRoute: false
+rabbitmq: {}
+ratings: {}
+mysql: {}
+cart: {}
+catalogue: {}
+dispatch: {}
+mongodb: {}
+shipping:   {}
+user: {}
+web: {}
