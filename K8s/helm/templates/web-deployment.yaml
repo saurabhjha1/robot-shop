@@ -23,7 +23,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: RATINGS_HOST
-          value: {{ .Values.host.RATINGS_HOST }}.{{ .Release.Namespace }}.{{ .Release.Namespace }}.svc.cluster.local
+          value: {{ .Values.host.RATINGS_HOST }}.{{ .Release.Namespace }}.svc.cluster.local
         - name: PAYMENT_HOST
           value: {{ .Values.host.PAYMENT_HOST }}.{{ .Release.Namespace }}.svc.cluster.local
         - name: CART_HOST
