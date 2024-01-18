@@ -16,7 +16,7 @@ RUN mvn package
 #
 # Run
 #
-FROM openjdk:17-jdk
+FROM openjdk:23-jdk
 
 EXPOSE 8080
 

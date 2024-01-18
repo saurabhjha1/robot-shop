@@ -12,7 +12,7 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const express = require('express');
 const pino = require('pino');
-const expPino = require('express-pino-logger');
+const expLogger = require('pino-http');
 const fs = require('fs');
 // Prometheus
 const promClient = require('prom-client');
@@ -34,9 +34,6 @@ const logger = pino({
     level: 'info',
     prettyPrint: false,
     useLevelLabels: true
-});
-const expLogger = expPino({
-    logger: logger
 });
 
 const app = express();

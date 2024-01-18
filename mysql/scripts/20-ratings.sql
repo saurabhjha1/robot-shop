@@ -10,7 +10,6 @@ CREATE TABLE ratings (
     PRIMARY KEY (sku)
 ) ENGINE=InnoDB;
 
+CREATE USER 'ratings'@'%' IDENTIFIED BY 'iloveit';
 
-GRANT ALL ON ratings.* TO 'ratings'@'%'
-IDENTIFIED BY 'iloveit';
-
+GRANT ALL ON ratings.* TO 'ratings'@'%';
