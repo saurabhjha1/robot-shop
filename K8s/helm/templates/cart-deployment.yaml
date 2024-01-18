@@ -41,7 +41,7 @@ spec:
             command:
             - sh
             - -c
-            - 'curl http://localhost:8080/health | grep -q true'
+            - 'curl http://cart:8080/health | grep -q true'
           initialDelaySeconds: 15
           periodSeconds: 10
           failureThreshold: 3
