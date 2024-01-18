@@ -10,14 +10,14 @@ ENV ARTI_PATH='artifact-public.instana.io/artifactory/shared/com/instana/nginx_t
 RUN if [ -n "$KEY" ]; then \
     sensor_version=$(wget -O- "https://_:${KEY}@${ARTI_PATH}" 2>&1 | \
       egrep -o "href=\"([0-9]+\.){2}[0-9]+/" | cut -d'"' -f2 | sort -V | tail -n1 | tr -d /); \
-    echo "Downloading sensor version ${sensor_version} for Nginx version 1.21.6" ; \
+    echo "Downloading sensor version ${sensor_version} for Nginx version 1.25.6" ; \
     $(wget -O instana.zip \
-      "https://_:${KEY}@${ARTI_PATH}/${sensor_version}/linux-amd64-glibc-nginx-1.21.6.zip") && \
+      "https://_:${KEY}@${ARTI_PATH}/${sensor_version}/linux-amd64-glibc-nginx-1.25.3.zip") && \
     unzip instana.zip && \
     mv glibc-libinstana_sensor.so libinstana_sensor.so && \
-    mv glibc-nginx-1.21.6-ngx_http_ot_module.so ngx_http_opentracing_module.so; \
+    mv glibc-nginx-1.25.3-ngx_http_ot_module.so ngx_http_opentracing_module.so; \
     else echo "KEY not provided. Not adding tracing"; \
-    touch dummy.so; \
+    touch dummy.so;\
     fi
 
 
