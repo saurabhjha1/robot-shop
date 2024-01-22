@@ -13,7 +13,7 @@ const redis = require('redis');
 const bodyParser = require('body-parser');
 const express = require('express');
 const pino = require('pino');
-const expPino = require('express-pino-logger');
+const expLogger = require('pino-http');
 const fs = require('fs');
 
 // MongoDB
@@ -26,10 +26,6 @@ const logger = pino({
     level: 'info',
     prettyPrint: false,
     useLevelLabels: true
-});
-const expLogger = expPino({
-    logger: logger
-
 });
 
 const app = express();
