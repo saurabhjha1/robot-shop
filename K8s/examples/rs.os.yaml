@@ -14,7 +14,7 @@ psp:
 nodeport: false
 
 # "special" Openshift. Set to true when deploying to any openshift flavour
-openshift: false
+openshift: true
 
 ocCreateRoute: false
 
